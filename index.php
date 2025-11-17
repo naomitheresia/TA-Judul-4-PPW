@@ -12,6 +12,40 @@ $contacts = loadContacts();
 
 <body class="bg-green-50 min-h-screen px-6 py-6">
 
+<script>
+function cariKontak() {
+  const input = document.getElementById('searchInput').value.toLowerCase();
+  const cards = document.querySelectorAll('.contact-card');
+  const emptyState = document.getElementById('emptyState');
+  let visibleCount = 0;
+  
+  cards.forEach(card => {
+    const text = card.textContent.toLowerCase();
+    if (text.includes(input)) {
+      card.style.display = '';
+      visibleCount++;
+    } else {
+      card.style.display = 'none';
+    }
+  });
+  
+  // Tampilkan pesan jika tidak ada hasil
+  if (visibleCount === 0 && input !== '') {
+    emptyState.innerHTML = `
+      <div class="text-center py-16">
+        <svg class="w-24 h-24 mx-auto text-gray-300 mb-4" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+        </svg>
+        <p class="text-gray-400 text-lg font-medium">Tidak ada kontak yang cocok dengan pencarian "${input}"</p>
+      </div>
+    `;
+    emptyState.style.display = '';
+  } else {
+    emptyState.style.display = 'none';
+  }
+}
+</script>
+
 <header class="flex justify-between items-center mb-6">
 
   <div class="flex items-center gap-3">
@@ -58,14 +92,16 @@ $contacts = loadContacts();
   <svg class="w-5 h-5 text-gray-400 absolute left-4 top-3.5" fill="none" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24">
     <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
   </svg>
-  <input class="w-full border rounded-full pl-12 pr-4 py-3 border-green-300 focus:border-green-500 focus:outline-none"
-  placeholder="Cari kontak... (belum aktif)">
+  <input id="searchInput" 
+         onkeyup="cariKontak()"
+         class="w-full border rounded-full pl-12 pr-4 py-3 border-green-300 focus:border-green-500 focus:outline-none"
+         placeholder="Cari kontak berdasarkan nama, email, telepon, kategori...">
 </div>
 
 <div class="grid gap-4">
 
 <?php foreach($contacts as $i=>$c): ?>
-<div class="p-5 bg-white rounded-xl border border-green-200 shadow hover:shadow-md transition-shadow flex items-start gap-4">
+<div class="contact-card p-5 bg-white rounded-xl border border-green-200 shadow hover:shadow-md transition-shadow flex items-start gap-4">
 
   <div class="bg-green-100 p-3 rounded-full">
     <svg class="w-8 h-8 text-green-600" fill="none" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24">
@@ -119,6 +155,8 @@ $contacts = loadContacts();
 
 </div>
 <?php endforeach; ?>
+
+<div id="emptyState" style="display: none;"></div>
 
 <?php if(empty($contacts)): ?>
 <div class="text-center py-16">

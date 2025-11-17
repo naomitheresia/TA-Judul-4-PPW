@@ -12,6 +12,17 @@ $CATEGORIES = [
   "Lainnya" => "M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"
 ];
 
+// AMBIL DATA KONTAK BERDASARKAN ID
+$id = $_GET["id"] ?? null;
+$all = loadContacts();
+
+if ($id === null || !isset($all[$id])) {
+    header("Location: index.php");
+    exit;
+}
+
+$contact = $all[$id];
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $data = [
       "name" => trim($_POST["name"]),
@@ -26,11 +37,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (!preg_match("/^[0-9]+$/", $data["phone"])) $errors[] = "Telepon hanya angka";
 
     if (!$errors) {
-        $all = loadContacts();
-        $all[] = $data;
+        // UPDATE DATA KONTAK (BUKAN TAMBAH BARU!)
+        $all[$id] = $data;
         saveContacts($all);
         header("Location: index.php");
         exit;
+    } else {
+        // Jika ada error, gunakan data dari POST
+        $contact = $data;
     }
 }
 ?>
@@ -38,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <html>
 <head>
   <script src="https://cdn.tailwindcss.com"></script>
-  <title>Tambah Kontak</title>
+  <title>Edit Kontak</title>
 </head>
 
 <body class="bg-green-50 min-h-screen flex items-center justify-center p-6">
@@ -49,9 +63,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   <div class="flex justify-between items-center mb-6">
     <div class="flex items-center gap-3">
       <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+        <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
       </svg>
-      <h2 class="text-3xl font-bold text-green-700">Tambah Kontak Baru</h2>
+      <h2 class="text-3xl font-bold text-green-700">Edit Kontak</h2>
     </div>
     <a href="index.php" class="text-red-500 hover:text-red-700 transition-colors">
       <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -84,7 +98,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
       <input name="name" 
              class="w-full border-2 px-4 py-3 rounded-lg border-green-300 focus:border-green-500 focus:outline-none transition-colors" 
              placeholder="Masukkan nama lengkap"
-             value="<?= htmlspecialchars($_POST['name'] ?? '') ?>"
+             value="<?= htmlspecialchars($contact['name']) ?>"
              required>
     </div>
 
@@ -96,7 +110,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
              type="email" 
              class="w-full border-2 px-4 py-3 rounded-lg border-green-300 focus:border-green-500 focus:outline-none transition-colors" 
              placeholder="contoh@email.com"
-             value="<?= htmlspecialchars($_POST['email'] ?? '') ?>"
+             value="<?= htmlspecialchars($contact['email']) ?>"
              required>
     </div>
 
@@ -107,7 +121,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
       <input name="phone" 
              class="w-full border-2 px-4 py-3 rounded-lg border-green-300 focus:border-green-500 focus:outline-none transition-colors" 
              placeholder="08xxxxxxxxxx"
-             value="<?= htmlspecialchars($_POST['phone'] ?? '') ?>"
+             value="<?= htmlspecialchars($contact['phone']) ?>"
              required>
     </div>
 
@@ -122,7 +136,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                  name="category" 
                  value="<?= $label ?>" 
                  class="peer hidden" 
-                 <?= (($_POST['category'] ?? '') === $label) ? 'checked' : '' ?>
+                 <?= ($contact['category'] === $label) ? 'checked' : '' ?>
                  required>
           <div class="border-2 border-green-300 p-4 rounded-xl text-center hover:border-green-400 peer-checked:bg-green-600 peer-checked:border-green-600 peer-checked:text-white transition-all duration-200 hover:shadow-md">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -142,7 +156,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
       <textarea name="address" 
                 class="w-full border-2 px-4 py-3 rounded-lg border-green-300 focus:border-green-500 focus:outline-none transition-colors resize-none" 
                 rows="3"
-                placeholder="Masukkan alamat lengkap"><?= htmlspecialchars($_POST['address'] ?? '') ?></textarea>
+                placeholder="Masukkan alamat lengkap"><?= htmlspecialchars($contact['address']) ?></textarea>
     </div>
 
     <div class="flex justify-between gap-4 pt-4">
@@ -158,7 +172,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
         </svg>
-        Simpan Kontak
+        Simpan Perubahan
       </button>
     </div>
 
