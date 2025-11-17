@@ -109,7 +109,7 @@ Menghapus kontak dengan konfirmasi terlebih dahulu.
 
 1. **Clone repository:**
    ```bash
-   git clone <url-repository>
+   git clone https://github.com/naomitheresia/TA-Judul-4-PPW.git
    ```
 
 2. **Pindahkan ke folder web server:**
