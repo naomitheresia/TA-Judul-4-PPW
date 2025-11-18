@@ -28,7 +28,7 @@ Password : 123456
 ### 1. 🔑 Login User
 Halaman login untuk autentikasi pengguna sebelum mengakses sistem.
 
-<img width="1919" height="988" alt="login" src="https://github.com/user-attachments/assets/0ef4ca01-ac2c-403a-9fe1-57708dd50440" />
+<img width="1916" height="963" alt="login" src="https://github.com/user-attachments/assets/17604fcb-8b40-4aee-bc9c-ad6400c86f1f" />
 
 
 ---
@@ -36,15 +36,15 @@ Halaman login untuk autentikasi pengguna sebelum mengakses sistem.
 ### 2. ➕ Tambah Kontak
 Form untuk menambahkan kontak baru dengan validasi input (nama, email, telepon, kategori, alamat).
 
-
-<img width="1900" height="961" alt="tambah kontak" src="https://github.com/user-attachments/assets/e6131531-2cd4-46ba-8611-bd87acaa025f" />
+<img width="1902" height="964" alt="tambah kontak" src="https://github.com/user-attachments/assets/8f7fa5da-88ee-4871-9bd7-54a79ece56f4" />
 
 ---
 
 ### 3. ⚠️ Notifikasi Error Tambah Kontak
 Sistem menampilkan pesan error jika data tidak valid (email salah, nama kurang dari 3 huruf, dll).
 
-<img width="1893" height="959" alt="error tambah kontak" src="https://github.com/user-attachments/assets/cdef9403-6657-443a-b074-fb24bd78dc65" />
+<img width="1894" height="965" alt="error tambah kontak" src="https://github.com/user-attachments/assets/3088a1e3-a58d-4a29-a4b9-9641ded1aafc" />
+
 
 ---
 
@@ -58,7 +58,7 @@ Menampilkan semua kontak yang tersimpan dengan informasi lengkap (nama, kategori
 ---
 
 ### 5. 🔍 Cari Kontak
-Fitur pencarian untuk menemukan kontak dengan cepat (belum aktif di versi ini).
+Fitur pencarian untuk menemukan kontak dengan cepat.
 
 <img width="1911" height="967" alt="cari" src="https://github.com/user-attachments/assets/80c4fb30-af13-4fcd-aa5b-10f95aaf4533" />
 
