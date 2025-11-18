@@ -45,9 +45,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 <div class="w-full max-w-2xl bg-white p-8 rounded-2xl shadow-lg border border-green-200">
 
-  <!-- HEADER -->
   <div class="flex justify-between items-center mb-6">
-    <h2 class="text-3xl font-bold text-green-700">➕ Tambah Kontak Baru</h2>
+    <h2 class="text-3xl font-bold text-green-700 flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 flex-shrink-0">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM3 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 9.374 21c-2.331 0-4.512-.645-6.374-1.766Z" />
+</svg>
+Tambah Kontak Baru</h2>
     <a href="index.php" class="text-red-500 hover:text-red-700 transition-colors">
       <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -55,7 +57,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     </a>
   </div>
 
-  <!-- ERROR -->
   <?php if ($errors): ?>
   <div class="bg-red-100 border border-red-400 text-red-700 p-4 rounded-lg mb-6 flex items-start">
     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -69,7 +70,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   </div>
   <?php endif; ?>
 
-  <!-- FORM -->
   <form method="POST" class="space-y-5">
 
     <div>

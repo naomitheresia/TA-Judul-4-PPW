@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (!preg_match("/^[0-9]+$/", $data["phone"])) $errors[] = "Telepon hanya angka";
 
     if (!$errors) {
-        // UPDATE DATA KONTAK (BUKAN TAMBAH BARU!)
+        // UPDATE DATA KONTAK 
         $all[$id] = $data;
         saveContacts($all);
         header("Location: index.php");
@@ -59,7 +59,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 <div class="w-full max-w-2xl bg-white p-8 rounded-2xl shadow-lg border border-green-200">
 
-  <!-- HEADER -->
   <div class="flex justify-between items-center mb-6">
     <div class="flex items-center gap-3">
       <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -74,7 +73,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     </a>
   </div>
 
-  <!-- ERROR -->
   <?php if ($errors): ?>
   <div class="bg-red-100 border border-red-400 text-red-700 p-4 rounded-lg mb-6 flex items-start">
     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -88,7 +86,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   </div>
   <?php endif; ?>
 
-  <!-- FORM -->
+
   <form method="POST" class="space-y-5">
 
     <div>

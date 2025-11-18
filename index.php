@@ -29,7 +29,6 @@ function cariKontak() {
     }
   });
   
-  // Tampilkan pesan jika tidak ada hasil
   if (visibleCount === 0 && input !== '') {
     emptyState.innerHTML = `
       <div class="text-center py-16">
